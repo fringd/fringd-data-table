@@ -1,12 +1,10 @@
 import { Component } from '@angular/core';
-import {MD_TABLE_DIRECTIVES} from "./components/table";
-import {DemoTableComponent} from "./demo-table/demo-table.component";
 
 @Component({
   selector: 'app-root',
-  template: `Hello! <table-demo></table-demo>`,
-  directives: [MD_TABLE_DIRECTIVES, DemoTableComponent],
-  styles: []
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  title = 'app works!';
 }

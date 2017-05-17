@@ -1,0 +1,131 @@
+:host {
+  display: block;
+}
+
+:host[fullwidth] table {
+  width: 100%;
+}
+
+.spacer {
+  overflow: hidden;
+}
+
+
+table {
+  background: white;
+  border: 0;
+  border-spacing: 0;
+  /deep/ > tbody{
+    > tr {
+      position: relative;
+    }
+  }
+  /deep/ > tbody, /deep/ > thead {
+    > tr {
+      position: relative;
+
+      &.is-selected {
+        background-color: #f5f5f5;
+      }
+
+      & > td, & > th {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+        box-sizing: border-box;
+        color: rgba(0,0,0, 0.87);
+        font-family: Roboto, Helvetica;
+        font-size: 13px;
+        font-weight: 400;
+        height: 48px;
+        overflow-x: hidden;
+        padding: 12px 18px;
+        position: relative;
+        text-align: left;
+        text-overflow: ellipsis;
+        vertical-align: middle;
+        white-space: nowrap;
+        &:last-of-type {
+          padding-right: 24px
+        }
+      }
+
+      > th {
+        border-top: 1px solid rgba(0, 0, 0, 0.12);
+        box-sizing: border-box;
+        color: rgba(0, 0, 0, 0.54);
+        font-size: 12px;
+        font-weight: 500;
+        height: 48px;
+        letter-spacing: 0;
+        line-height: 24px;
+        padding-bottom: 8px;
+      }
+    }
+  }
+}
+
+/** styles for scrollable table **/
+.container {
+  position: relative;
+  display: inline-block;
+}
+
+.scroller {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  max-height: 400px;
+
+  table {
+    position: static;
+    table-layout: fixed;
+    /deep/ > thead > tr > th {
+      height: 48px;
+      border-top: 1px solid rgba(0,0,0,0.12);
+      border-bottom: 1px solid rgba(0,0,0,0.12);
+      position: absolute;
+      background: white;
+      z-index: 1;
+    }
+  }
+}
+
+/**
+ * There is no way to define text-align on a col element
+ * so this hack is the best way to do it. numeric<n> means
+ * that the column with 0-index n will be aligned right.
+ *
+ * TODO(fringd): if there's a better way to do this find it.
+ */
+:host.numeric0 table /deep/ > tbody > tr > td:nth-child(1),
+:host.numeric1 table /deep/ > tbody > tr > td:nth-child(2),
+:host.numeric2 table /deep/ > tbody > tr > td:nth-child(3),
+:host.numeric3 table /deep/ > tbody > tr > td:nth-child(4),
+:host.numeric4 table /deep/ > tbody > tr > td:nth-child(5),
+:host.numeric5 table /deep/ > tbody > tr > td:nth-child(6),
+:host.numeric6 table /deep/ > tbody > tr > td:nth-child(7),
+:host.numeric7 table /deep/ > tbody > tr > td:nth-child(8),
+:host.numeric8 table /deep/ > tbody > tr > td:nth-child(9),
+:host.numeric9 table /deep/ > tbody > tr > td:nth-child(10),
+:host.numeric10 table /deep/ > tbody > tr > td:nth-child(11),
+:host.numeric11 table /deep/ > tbody > tr > td:nth-child(12),
+:host.numeric12 table /deep/ > tbody > tr > td:nth-child(13),
+:host.numeric13 table /deep/ > tbody > tr > td:nth-child(14),
+:host.numeric14 table /deep/ > tbody > tr > td:nth-child(15),
+:host.numeric15 table /deep/ > tbody > tr > td:nth-child(16),
+:host.numeric16 table /deep/ > tbody > tr > td:nth-child(17),
+:host.numeric17 table /deep/ > tbody > tr > td:nth-child(18),
+:host.numeric18 table /deep/ > tbody > tr > td:nth-child(19),
+:host.numeric19 table /deep/ > tbody > tr > td:nth-child(20),
+:host.numeric20 table /deep/ > tbody > tr > td:nth-child(21),
+:host.numeric21 table /deep/ > tbody > tr > td:nth-child(22),
+:host.numeric22 table /deep/ > tbody > tr > td:nth-child(23),
+:host.numeric23 table /deep/ > tbody > tr > td:nth-child(24),
+:host.numeric24 table /deep/ > tbody > tr > td:nth-child(25),
+:host.numeric25 table /deep/ > tbody > tr > td:nth-child(26),
+:host.numeric26 table /deep/ > tbody > tr > td:nth-child(27),
+:host.numeric27 table /deep/ > tbody > tr > td:nth-child(28),
+:host.numeric28 table /deep/ > tbody > tr > td:nth-child(29),
+:host.numeric29 table /deep/ > tbody > tr > td:nth-child(30),
+:host.numeric30 table /deep/ > tbody > tr > td:nth-child(31)
+{
+  text-align:right;
+}

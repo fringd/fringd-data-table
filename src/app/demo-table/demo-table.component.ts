@@ -1,14 +1,10 @@
 import {Component} from '@angular/core';
-import {MdButton} from '@angular2-material/button';
+import {MdButton} from '@angular/material';
 import {MD_TABLE_DIRECTIVES} from '../components/table';
 
 @Component({
-  selector: 'table-demo',
+  selector: 'demo-table',
   templateUrl: './demo-table.component.html',
-  directives: [
-    MD_TABLE_DIRECTIVES,
-    MdButton,
-  ]
 })
 export class DemoTableComponent {
   items = [

@@ -1,10 +1,9 @@
 import {ChangeDetectorRef, ChangeDetectionStrategy, Component, EventEmitter, Output} from '@angular/core';
-import {MdCheckbox, MdCheckboxChange} from '@angular2-material/checkbox/checkbox';
+import {MdCheckbox} from '@angular/material';
 import {SelectionService} from '../selection-service';
 
 @Component({
   selector: 'th[selector]:not([item])',
-  directives: [MdCheckbox],
   template:
     '<md-checkbox [checked]="selected" (change)="selected = $event.checked"></md-checkbox>',
   styles: [`

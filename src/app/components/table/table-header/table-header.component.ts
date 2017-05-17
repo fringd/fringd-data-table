@@ -12,7 +12,7 @@ import {ElementRef, Component, HostListener, Input, Output, EventEmitter} from '
   selector: 'th[sort], th[width], th[numeric]',
   template: '<ng-content></ng-content>',
   styleUrls:
-    ['./table-header.component.css'],
+    ['table-header.component.scss'],
   host: {
     '[class.ascending]': 'ascending',
     '[class.descending]': 'descending',

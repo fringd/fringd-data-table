@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Directive, DoCheck, IterableDiffer, IterableDiffers, CollectionChangeRecord, TemplateRef, ViewContainerRef, EmbeddedViewRef, ViewRef} from '@angular/core';
+import {isDevMode, Input, TrackByFunction, ChangeDetectorRef, Directive, DoCheck, DefaultIterableDiffer, IterableChanges, IterableDiffer, IterableDiffers, CollectionChangeRecord, TemplateRef, ViewContainerRef, EmbeddedViewRef, ViewRef} from '@angular/core';
 import {SelectionService} from '../selection-service';
 
 /**
@@ -16,14 +16,14 @@ import {SelectionService} from '../selection-service';
  * window.
  */
 @Directive({
-  selector: '[for]',
+  selector: '[for][forOf]',
   inputs: ['forOf'],
 })
 export class MdTableFor implements DoCheck {
   public collection: any;  // visible for selectAll
   private sortedCollection: any[];
-  private sortedDiffer: IterableDiffer;
-  private differ: IterableDiffer;
+  private sortedDiffer: IterableDiffer<any>;
+  private differ: IterableDiffer<any>;
   private sortField: string;
   private ascending: boolean;
   offset: number = 0;
@@ -35,15 +35,33 @@ export class MdTableFor implements DoCheck {
     private viewContainer: ViewContainerRef,
     private selectionService: SelectionService) {}
 
+  @Input()
   set forOf(collection: any) {
     this.collection = collection;
     this.selectionService.setCollection(collection);
     if (collection && !this.differ) {
-      this.differ = this.differs.find(collection).create(this.changeDetector);
+      this.differ = this.differs.find(collection).create(this._trackByFn);
       this.sortedCollection = [];
       this.sortedDiffer = this.differs.find(this.visibleRows()).create(null);
     }
   }
+
+  @Input()
+  set ngForTrackBy(fn: TrackByFunction<any>) {
+    if (isDevMode() && fn != null && typeof fn !== 'function') {
+      // TODO(vicb): use a log service once there is a public one available
+      if (<any>console && <any>console.warn) {
+        console.warn(
+            `trackBy must be a function, but received ${JSON.stringify(fn)}. ` +
+            `See https://angular.io/docs/ts/latest/api/common/index/NgFor-directive.html#!#change-propagation for more information.`);
+      }
+    }
+    this._trackByFn = fn;
+  }
+
+  get ngForTrackBy(): TrackByFunction<any> { return this._trackByFn; }
+
+  private _trackByFn: TrackByFunction<any>;
 
   setPagination(offset: number, perPage: number) {
     if (offset == this.offset && perPage == this.perPage) {
@@ -78,11 +96,11 @@ export class MdTableFor implements DoCheck {
     }
     for (let i = 0; i < this.viewContainer.length; i++) {
       let view:ViewRef = this.viewContainer.get(i);
-      <ChangeDetectorRef>((<any>view)._view.changeDetectorRef).detectChanges();
+      view.detectChanges();
     }
   }
 
-  private updateSorted(changes: any /* DefaultIterableDiffer */) {
+  private updateSorted(changes: IterableChanges<any>) {
     if (isBlank(this.sortField)) {
       // maintain original order
       this.sortedCollection =
@@ -91,13 +109,13 @@ export class MdTableFor implements DoCheck {
     }
     let removedIndexes: number[] = [];
     changes.forEachRemovedItem(
-      (removedRecord: CollectionChangeRecord) =>
+      (removedRecord: CollectionChangeRecord<any>) =>
         removedIndexes.push(removedRecord.previousIndex));
     for (let index of removedIndexes.sort().reverse()) {
       this.sortedCollection.splice(index, 1);
     }
     changes.forEachAddedItem(
-      (addedRecord: CollectionChangeRecord) =>
+      (addedRecord: CollectionChangeRecord<any>) =>
         this.insertSorted(addedRecord.item));
   }
 
@@ -135,7 +153,7 @@ export class MdTableFor implements DoCheck {
 
   private templateCache: EmbeddedViewRef<any>[] = [];
 
-  private _applyChanges(changes: any /* DefaultIterableDiffer */) {
+  private _applyChanges(changes: IterableChanges<any>) {
 //  let rows = this.visibleRows();
 //  if (this.viewContainer.length == rows.length) {
 //    for (let i = 0; i < rows.length; i++) {
@@ -149,17 +167,17 @@ export class MdTableFor implements DoCheck {
     // easier to consume than current.
     let recordViewTuples: RecordViewTuple[] = [];
     changes.forEachRemovedItem(
-      (removedRecord: CollectionChangeRecord) =>
+      (removedRecord: CollectionChangeRecord<any>) =>
         recordViewTuples.push(new RecordViewTuple(removedRecord, null)));
 
     changes.forEachMovedItem(
-      (movedRecord: CollectionChangeRecord) =>
+      (movedRecord: CollectionChangeRecord<any>) =>
         recordViewTuples.push(new RecordViewTuple(movedRecord, null)));
 
     let insertTuples = this._bulkRemove(recordViewTuples);
 
     changes.forEachAddedItem(
-      (addedRecord: CollectionChangeRecord) =>
+      (addedRecord: CollectionChangeRecord<any>) =>
         insertTuples.push(new RecordViewTuple(addedRecord, null)));
 
     this._bulkInsert(insertTuples);
@@ -176,9 +194,9 @@ export class MdTableFor implements DoCheck {
   }
 
   private _perViewChange(
-    view: EmbeddedViewRef<any>, record: CollectionChangeRecord) {
+    view: EmbeddedViewRef<any>, record: CollectionChangeRecord<any>) {
     view.context.$implicit = record.item;
-    <ChangeDetectorRef>((<any>view)._view.changeDetectorRef).detectChanges();
+    view.detectChanges();
   }
 
   private _bulkRemove(tuples: RecordViewTuple[]): RecordViewTuple[] {
@@ -209,7 +227,7 @@ export class MdTableFor implements DoCheck {
   }
 
   private getShift(tuple:RecordViewTuple):number {
-    let record:CollectionChangeRecord  = tuple.record;
+    let record:CollectionChangeRecord<any>  = tuple.record;
     if (record.currentIndex != null && record.previousIndex != null) {
       return record.currentIndex - record.previousIndex;
     } else {

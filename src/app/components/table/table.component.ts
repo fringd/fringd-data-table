@@ -35,9 +35,8 @@ import {SelectionService} from './selection-service';
 @Component({
   selector: 'md-table',
   providers: [SelectionService],
-  directives: [],
-  templateUrl: './table.component.html',
-  styleUrls: ['./table.component.css'],
+  templateUrl: 'table.component.html',
+  styleUrls: ['table.component.scss'],
 })
 export class MdTable implements AfterContentInit,
   AfterViewChecked {

@@ -1,14 +1,20 @@
 import {ChangeDetectorRef, AfterViewChecked, ViewChild, ElementRef, Component, HostListener, Input, Output, EventEmitter} from '@angular/core';
-import {MdInput} from '@angular2-material/input';
+
+import {MdInputDirective} from '@angular/material';
 
 // TODO(fringd): support multiple types of data and custom input widgets
 @Component({
   selector: 'th[editable], td[editable]',
-  directives: [MdInput],
   template: `
     <div class=editor *ngIf="editing">
       <div [style.width.px]="width">
-        <md-input (change)=onValueChange() (keypress)="onKeyPress($event)" (blur)="close()" [(ngModel)]="value"></md-input>
+        <md-input-container>
+          <input mdInput
+                 (change)=onValueChange()
+                 (keypress)="onKeyPress($event)"
+                 (blur)="close()"
+                 [(ngModel)]="value">
+        </md-input-container>
       </div>
     </div>
     <ng-content></ng-content>
@@ -43,7 +49,7 @@ export class MdTableEditable implements AfterViewChecked {
   private editing: boolean;
   private needsFocus = false;
   private width: number;
-  @ViewChild(MdInput) textbox: MdInput;
+  @ViewChild(MdInputDirective) textbox: MdInputDirective;
   @Input() set editable(editable: string) {
     this.value = editable;
   }
