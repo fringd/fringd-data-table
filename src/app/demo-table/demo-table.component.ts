@@ -4,7 +4,8 @@ import {MD_TABLE_DIRECTIVES} from '../components/table';
 
 @Component({
   selector: 'demo-table',
-  templateUrl: './demo-table.component.html',
+  styleUrls: ['demo-table.component.css'],
+  templateUrl: 'demo-table.component.html',
 })
 export class DemoTableComponent {
   items = [

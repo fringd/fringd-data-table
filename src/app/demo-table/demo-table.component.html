@@ -2,6 +2,25 @@
   <h3>Table</h3>
 
   <h4>Local Sort and Infinite Scroll</h4>
+  <code ngNonBindable>
+    &lt;md-button (click)="add1000()"&gt;add 1000 rows&lt;/button&gt;&lt;br/&gt;
+    &lt;md-table scrollable="true"&gt;
+      &lt;thead&gt;
+      &lt;tr&gt;
+        &lt;th width=150 sort="name"&gt;Name&lt;/th&gt;
+        &lt;th numeric width=90 sort="id"&gt;ID&lt;/th&gt;
+        &lt;th width=200 sort="power"&gt;Power&lt;/th&gt;
+      &lt;/tr&gt;
+      &lt;/thead&gt;
+      &lt;tbody&gt;
+      &lt;tr *for="let item of items"&gt;
+        &lt;td&gt;{{item.name}}&lt;/td&gt;
+        &lt;td&gt;{{item.id}}&lt;/td&gt;
+        &lt;td&gt;{{item.power}}&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;/tbody&gt;
+    &lt;/md-table&gt;
+  </code>
   <button md-button (click)="add1000()">add 1000 rows</button><br/>
   <md-table scrollable="true">
     <thead>
@@ -21,7 +40,33 @@
   </md-table>
 
   <h4>Server side Sort</h4>
+  <code ngNonBindable>
+    &lt;button md-button (click)="add1000()"&gt;add 1000 rows&lt;/button&gt;&lt;br/&gt;
+    &lt;md-table scrollable="true"&gt;
+      &lt;thead&gt;
+      &lt;tr&gt;
+        &lt;th width=150 sort="name"&gt;Name&lt;/th&gt;
+        &lt;th numeric width=90 sort="id"&gt;ID&lt;/th&gt;
+        &lt;th width=200 sort="power"&gt;Power&lt;/th&gt;
+      &lt;/tr&gt;
+      &lt;/thead&gt;
+      &lt;tbody&gt;
+      &lt;tr *for="let item of items"&gt;
+        &lt;td&gt;{{item.name}}&lt;/td&gt;
+        &lt;td&gt;{{item.id}}&lt;/td&gt;
+        &lt;td&gt;{{item.power}}&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;/tbody&gt;
+    &lt;/md-table&gt;
+  </code>
   <p>$event will be a tuple of [sortField:string, ascending:boolean]</p>
+  <code ngNonBindable>
+    updatedata(sort:[string, boolean]) &#123;
+      let sortfield = sort[0];
+      let ascending = sort[1];
+      this.server.getSortedData(sortField, ascending, (sortedItems) =&gt; this.serverItems = sortedItems );
+    &#125;
+  </code>
   <md-table server-side-sort="true" (sort)=updateData($event)>
     <thead>
     <tr>
@@ -40,6 +85,25 @@
   </md-table>
 
   <h4>Selection</h4>
+  <code ngNonBindable>
+    &lt;button md-button (click)="add1000()"&gt;add 1000 rows&lt;/button&gt;&lt;br/&gt;
+    &lt;md-table scrollable="true"&gt;
+      &lt;thead&gt;
+      &lt;tr&gt;
+        &lt;th width=150 sort="name"&gt;Name&lt;/th&gt;
+        &lt;th numeric width=90 sort="id"&gt;ID&lt;/th&gt;
+        &lt;th width=200 sort="power"&gt;Power&lt;/th&gt;
+      &lt;/tr&gt;
+      &lt;/thead&gt;
+      &lt;tbody&gt;
+      &lt;tr *for="let item of items"&gt;
+        &lt;td&gt;{{item.name}}&lt;/td&gt;
+        &lt;td&gt;{{item.id}}&lt;/td&gt;
+        &lt;td&gt;{{item.power}}&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;/tbody&gt;
+    &lt;/md-table&gt;
+  </code>
   <div style="display:inline-block">
     <md-table #selectableTable>
       <thead>
@@ -70,6 +134,22 @@
   </div>
 
   <h4>Editable cells</h4>
+  <code ngNonBindable>
+    &lt;md-table&gt;
+      &lt;thead&gt;
+      &lt;tr&gt;
+        &lt;th sort=name&gt;Name&lt;/th&gt;
+        &lt;th numeric sort=id&gt;ID&lt;/th&gt;
+      &lt;/tr&gt;
+      &lt;/thead&gt;
+      &lt;tbody&gt;
+      &lt;tr *for=&quot;let item of editableItems&quot;&gt;
+        &lt;td [(editable)]=&quot;item.name&quot;&gt;{{item.name}}&lt;/td&gt;
+        &lt;td&gt;{{item.id}}&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;/tbody&gt;
+    &lt;/md-table&gt;
+  </code>
   <md-table>
     <thead>
     <tr>
