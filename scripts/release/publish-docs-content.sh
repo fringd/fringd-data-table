@@ -70,7 +70,7 @@ cp -r $examplesSource/* $repoPath/examples
 cp -r $docsPath/plunker/* $repoPath/plunker
 
 # Copies assets over to the docs-content repository.
-cp LICENSE $repoPath/
+cp LICENSE.md $repoPath/
 
 # Push content to repo
 cd $repoPath

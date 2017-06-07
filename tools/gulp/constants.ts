@@ -29,8 +29,8 @@ export const HTML_MINIFIER_OPTIONS = {
 };
 
 export const LICENSE_BANNER = `/**
-  * @license Angular Material v${FRINGD_TABLE_VERSION}
-  * Copyright (c) 2017 fringd@gmail.com
+  * @license fringd-table v${FRINGD_TABLE_VERSION}
+  * Copyright (c) 2017 Ram Dobson (fringd@gmail.com)
   * License: MIT
   */`;
 

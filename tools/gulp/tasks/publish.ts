@@ -41,7 +41,7 @@ function _execNpmPublish(label: string, packageName: string): Promise<{}> {
     throw new Error(`"${packageDir}" does not have a package.json.`);
   }
 
-  if (!existsSync(join(packageDir, 'LICENSE'))) {
+  if (!existsSync(join(packageDir, 'LICENSE.md'))) {
     throw new Error(`"${packageDir}" does not have a LICENSE file`);
   }
 

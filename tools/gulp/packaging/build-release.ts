@@ -23,7 +23,7 @@ export function composeRelease(packageName: string) {
   copyFiles(packagePath, '**/*.+(d.ts|metadata.json)', join(releasePath, 'typings'));
   copyFiles(DIST_BUNDLES, `${packageName}.umd?(.min).js?(.map)`, join(releasePath, 'bundles'));
   copyFiles(DIST_BUNDLES, `${packageName}?(.es5).js?(.map)`, releasePath);
-  copyFiles(PROJECT_ROOT, 'LICENSE', releasePath);
+  copyFiles(PROJECT_ROOT, 'LICENSE.md', releasePath);
   copyFiles(SOURCE_ROOT, 'README.md', releasePath);
   copyFiles(sourcePath, 'package.json', releasePath);
 
