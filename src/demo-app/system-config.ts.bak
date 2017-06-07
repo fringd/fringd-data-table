@@ -1,0 +1,87 @@
+// SystemJS configuration file, see links for more information
+// https://github.com/systemjs/systemjs
+// https://github.com/systemjs/systemjs/blob/master/docs/config-api.md
+
+// node rewrites
+const paths: any = {
+  'node:*': 'node_modules/*',
+};
+
+/***********************************************************************************************
+ * User Configuration.
+ **********************************************************************************************/
+/** Map relative paths to URLs. */
+const map: any = {
+    'rxjs': 'node:rxjs',
+    'main': 'main.js',
+
+    // Angular specific mappings.
+    '@angular/core': 'node:@angular/core/bundles/core.umd.js',
+    '@angular/common': 'node:@angular/common/bundles/common.umd.js',
+    '@angular/compiler': 'node:@angular/compiler/bundles/compiler.umd.js',
+    '@angular/http': 'node:@angular/http/bundles/http.umd.js',
+    '@angular/forms': 'node:@angular/forms/bundles/forms.umd.js',
+    '@angular/router': 'node:@angular/router/bundles/router.umd.js',
+    '@angular/animations': 'node:@angular/animations/bundles/animations.umd.js',
+    '@angular/animations/browser': 'node:@angular/animations/bundles/animations-browser.umd.js',
+    '@angular/platform-browser': 'node:@angular/platform-browser/bundles/platform-browser.umd.js',
+    '@angular/platform-browser/animations':
+      'node:@angular/platform-browser/bundles/platform-browser-animations.umd.js',
+    '@angular/platform-browser-dynamic':
+      'node:@angular/platform-browser-dynamic/bundles/platform-browser-dynamic.umd.js',
+    '@angular/material': 'node:@angular/material/bundles/material.umd.js',
+    '@angular/cdk': 'node:@angular/material/bundles/cdk.umd.js',
+
+    'fringd-table': 'dist/bundles/fringd-table.umd.js'
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+/***********************************************************************************************
+ * Everything underneath this line is managed by the CLI.
+ **********************************************************************************************/
+const barrels: string[] = [
+  // Angular specific barrels.
+  '@angular/core',
+  '@angular/common',
+  '@angular/compiler',
+  '@angular/forms',
+  '@angular/http',
+  '@angular/router',
+  '@angular/platform-browser',
+  '@angular/platform-browser-dynamic',
+
+  // Thirdparty barrels.
+  'rxjs',
+
+  // App specific barrels.
+  'app',
+  'app/components/table',
+  'app/components/table/table-editable',
+  'app/components/table/table-for',
+  'app/components/table/table-global-selector',
+  'app/components/table/table-header',
+  'app/components/table/table-selector',
+  'app/demo-table',
+  /** @cli-barrel */
+];
+
+const cliSystemConfigPackages: any = {};
+barrels.forEach((barrelName: string) => {
+  cliSystemConfigPackages[barrelName] = { main: 'index' };
+});
+
+/** Type declaration for ambient System. */
+declare var System: any;
+
+// Apply the CLI SystemJS configuration.
+System.config({
+  map: {
+    '@angular': 'vendor/@angular',
+    'rxjs': 'vendor/rxjs',
+    'main': 'main.js'
+  },
+  packages: cliSystemConfigPackages
+});
+
+// Apply the user's configuration.
+System.config({ map, packages, paths });

@@ -19,6 +19,6 @@
     ]
   },
   "paths": {
-  	"fringd-table": ["src/lib/table.module.bundle.ts"]
+  	"fringd-table": ["lib-dist/table.module.bundle"]
   }
 }

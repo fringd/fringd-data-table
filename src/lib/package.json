@@ -1,0 +1,33 @@
+{
+  "name": "fringd-table",
+  "version": "0.0.0-PLACEHOLDER",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/fringd/fringd-table/issues"
+  },
+  "typings": "./fringd-table.d.ts",
+  "main": "./bundles/fingd-table.umd.js",
+  "module": "./fringd-table.es5.js",
+  "es2015": "./fringd-table.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fringd/fringd-table.git"
+  },
+  "keywords": [
+    "angular",
+    "material",
+    "material design",
+    "components",
+    "data table",
+    "table"
+  ],
+  "peerDependencies": {
+    "@angular/core": "^4.0.0",
+    "@angular/common": "^4.0.0",
+    "@angular/core": "^4.0.0",
+    "@angular/forms": "^4.0.0",
+    "@angular/http": "^4.0.0",
+    "@angular/material": "^2.0.0-beta.6",
+    "rxjs": "^5.1.0"
+  }
+}

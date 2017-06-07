@@ -1,0 +1,34 @@
+{
+  "name": "fringd-table",
+  "version": "0.0.0-PLACEHOLDER",
+  "description": "An easy to use data table",
+  "main": "./bundles/fringd-table.umd.js",
+  "module": "./fringd-table.es5.js",
+  "es2015": "./fringd-table.js",
+  "typings": "./fringd-table.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fringd/fringd-table.git"
+  },
+  "keywords": [
+    "angular",
+    "material",
+    "material design",
+    "data table",
+    "table",
+    "components"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/fringd/fringd-table/issues"
+  },
+  "homepage": "https://github.com/fringd/fringd-table#readme",
+  "peerDependencies": {
+    "@angular/core": "^4.0.0",
+    "@angular/common": "^4.0.0",
+    "@angular/material": "^2.0.0-beta.5"
+  },
+  "dependencies": {
+    "tslib": "^1.7.1"
+  }
+}

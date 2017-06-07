@@ -1,4 +1,4 @@
-# MdDataTableProto
+# fringd-data-table
 
 ## Getting started
 
