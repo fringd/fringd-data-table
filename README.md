@@ -1,4 +1,4 @@
-# fringd-data-table
+# fringd-table
 
 ## Getting started
 
