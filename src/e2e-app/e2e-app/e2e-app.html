@@ -1,0 +1,16 @@
+<fringd-table>
+  <thead>
+    <tr>
+      <th width=150 sort="name">Name</th>
+      <th numeric width=90 sort="id">ID</th>
+      <th width=200 sort="power">Power</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *for="let item of items">
+      <td>{{item.name}}</td>
+      <td>{{item.id}}</td>
+      <td>{{item.power}}</td>
+    </tr>
+  </tbody>
+</fringd-table>
