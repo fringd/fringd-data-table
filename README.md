@@ -2,7 +2,7 @@
 
 This is a table component I made. It tries to follow the material design spec
 for tables. It currently supports local sorting, in place edit, and infinite
-scroll at 60fps with 100ks of rows.
+scroll at 60fps with 100ks of rows. Check out the [demo](http://www.fringd.com/).
 
 I tried very hard to make using it as easy as writing an html table. The API is
 very similar to writing a normal table, except with the tag fringd-table
